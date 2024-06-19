@@ -14,10 +14,10 @@ func errorHandler(status int) bool {
 
 func main() {
 	// Define the directory containing static files
-	staticDir := http.Dir("./")
+	directory := "./"
 
 	// Create a file server handler for the static directory
-	fileServer := http.FileServer(staticDir)
+	fileServer := http.FileServer(http.Dir(directory))
 	fileServerr := http.FileServer(http.Dir("./images"))
 
 	// Handle all requests using the file server
