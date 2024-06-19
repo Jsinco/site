@@ -2,61 +2,57 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 )
 
-func main() {
-	// Define directory for static files
-	staticDir := http.Dir("./")
-	images := http.Dir("./images")
+type hijack404 struct {
+	http.ResponseWriter
+	R         *http.Request
+	Handle404 func(w http.ResponseWriter, r *http.Request) bool
+}
 
-	// Create file server handlers
-	fileServer := http.FileServer(staticDir)
-	imageServer := http.FileServer(images)
+func (h *hijack404) WriteHeader(code int) {
+	if 404 == code && h.Handle404(h.ResponseWriter, h.R) {
+		panic(h)
+	}
 
-	// Handler function for all requests
-	http.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Try serving files from specific folders first
-		var err error
-		fileServer.ServeHTTP(w, r)
-		imageServer.ServeHTTP(w, r)
+	h.ResponseWriter.WriteHeader(code)
+}
 
-		// Check for errors or 404 (Not Found)
-		if err != nil {
-			if os.IsNotExist(err) {
-				serveNotFound(w, r)
-				return
+func Handle404(handler http.Handler, handle404 func(w http.ResponseWriter, r *http.Request) bool) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		hijack := &hijack404{ResponseWriter: w, R: r, Handle404: handle404}
+
+		defer func() {
+			if p := recover(); p != nil {
+				if p == hijack {
+					return
+				}
+				panic(p)
 			}
-			// Handle other errors (optional)
-			log.Println("Error serving file:", err)
-			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		}
-	}))
+		}()
 
-	// Start the server
+		handler.ServeHTTP(hijack, r)
+	})
+}
+
+func fire404(w http.ResponseWriter, r *http.Request) bool {
+	http.ServeFile(w, r, "404.html")
+
+	return true
+}
+
+func main() {
+	handlerStatics := http.StripPrefix("/", http.FileServer(http.Dir("./")))
+
+	var vBlessedHandlerStatics = Handle404(handlerStatics, fire404)
+
+	http.Handle("/", vBlessedHandlerStatics)
+
+	// add other handlers using http.Handle() as necessary
 	fmt.Println("Server listening on port 3333")
-	err := http.ListenAndServe(":3333", nil)
-	if err != nil {
-		log.Fatal(err)
+	if err := http.ListenAndServe(":3333", nil); err != nil {
+		log.Fatal("ListenAndServe: ", err)
 	}
-}
-
-// Helper function to check URL path prefix
-func hasPrefix(path string, prefix string) bool {
-	return len(path) >= len(prefix) && path[:len(prefix)] == prefix
-}
-
-// Serve custom 404 page (assuming 404.html is in the same directory)
-func serveNotFound(w http.ResponseWriter, r *http.Request) {
-	data, err := ioutil.ReadFile("404.html")
-	if err != nil {
-		log.Println("Error reading 404.html:", err)
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-	w.WriteHeader(http.StatusNotFound)
-	w.Write(data)
 }

@@ -3,12 +3,14 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 )
 
 var port = ":3333"
 
 func main() {
 	// Define the directory containing static files
+
 	directory := "./"
 
 	// Create a file server handler for the static directory
@@ -17,17 +19,16 @@ func main() {
 
 	// Handle all requests using the file server
 	http.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// check if path will return a file
+		stat, _ := os.Stat("." + r.URL.Path)
 
-		// Temporary solution :)
-		if r.URL.Path != "/" {
-			fmt.Println("404 Not Found")
+		if stat == nil && r.URL.Path != "/" {
 			http.ServeFile(w, r, "404.html")
 			return
 		}
 
 		fileServer.ServeHTTP(w, r)
 		images.ServeHTTP(w, r)
-
 	}))
 
 	// Start the server
