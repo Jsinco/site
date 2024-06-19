@@ -19,6 +19,8 @@ func main() {
 
 	// Handle all requests using the file server
 	http.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("Request from: " + r.RemoteAddr)
+
 		// check if path will return a file
 		stat, _ := os.Stat("." + r.URL.Path)
 
