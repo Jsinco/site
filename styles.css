@@ -6,20 +6,41 @@
     scroll-behavior: smooth;
 }
 
-
-
 :root {
+    --hex1: #ff6a00;
+    --hex2: #ea3c91;
+
     --color1: #9b9393;
     --color2: #000000;
     --gradient-direction: to right;
+    --circle-size: 35px;
 }
 
+body {
+    background-color: #1D1E22;
+    cursor: none;
+}
 
+.circle {
+    position: fixed;
+    height: var(--circle-size);
+    width: var(--circle-size);
+    background: 1px linear-gradient(
+            to right,
+            var(--hex1),
+            var(--hex2)
+    );
+    border-radius: 100%;
+    top: calc(var(--circle-size) / 2 * -1);
+    left: calc(var(--circle-size) / 2 * -1);
+    pointer-events: none;
+    z-index: 999;
+}
 
 .gradient-background {
     background: linear-gradient(var(--gradient-direction), var(--color1)-25%, var(--color2));
     /*background: linear-gradient(var(--gradient-direction), var(--color1), var(--color2));*/
-    padding: 320px 0;
+    padding: 380px 0;
     position: relative; /* Required for absolute positioning of pseudo-element */
 }
 
@@ -50,16 +71,16 @@
 }
 
 .background__heading span {
-    background: #ee0979; /* fallback for old browsers */
+    background: var(--hex2); /* fallback for old browsers */
     background: -webkit-linear-gradient(
             to right,
-            #ff6a00,
-            #ee0979
+            var(--hex1),
+            var(--hex2)
     ); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(
             to right,
-            #ff6a00,
-            #ee0979
+            var(--hex1),
+            var(--hex2)
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background-size: 100%;
 
@@ -131,13 +152,14 @@
 
 .main__content h1 {
     font-size: 2rem;
-    background-color: #fe3b6f;
+    background-color: var(--hex1);
     background-image: linear-gradient(to top, #ff087b 0%, #ed1a52 100%);
     background-size: 100%;
+
     -webkit-background-clip: text;
     -moz-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
+    -webkit-text-fill-color: var(--hex2);
+    -moz-text-fill-color: var(--hex2);
     text-transform: uppercase;
     margin-bottom: 32px;
 }
@@ -147,13 +169,13 @@
     background: #ff8177; /* fallback for old browsers */
     background: -webkit-linear-gradient(
             to right,
-            #9114ff,
-            #da22ff
+            var(--color1),
+            var(--color2)
     ); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(
             to right,
-            #8f0eff,
-            #da22ff
+            var(--color1),
+            var(--color2)
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background-size: 100%;
     -webkit-background-clip: text;
@@ -171,13 +193,13 @@
 .main__btn {
     font-size: 1.8rem;
     background: #833ab4;
-    background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);
-    background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);
+    background: -webkit-linear-gradient(to right, var(--hex1), var(--hex2));
+    background: linear-gradient(to right, var(--hex1), var(--hex2));
     padding: 20px 50px;
     border: none;
     border-radius: 15px;
     margin-top: 2rem;
-    cursor: pointer;
+    cursor: none;
     position: relative;
     transition: all 0.35s;
     outline: none;
@@ -188,6 +210,7 @@
     z-index: 2;
     color: #fff;
     text-decoration: none;
+    cursor: none;
 }
 
 .main__btn:after {
@@ -233,8 +256,8 @@
 
 #card-2 {
     background: #ff512f;
-    background: -webkit-linear-gradient(to right, #dd2476, #ff512f);
-    background: linear-gradient(to right, #dd2476, #ff512f);
+    background: -webkit-linear-gradient(to right, var(--hex2), var(--hex1));
+    background: linear-gradient(to right, var(--hex2), var(--hex1));
 }
 
 /* Mobile Responsive */
@@ -323,7 +346,7 @@
 
 .tools h1 {
     background-color: #ff8177;
-    background-image: linear-gradient(to right, #ff0844 0%, #f7673c 100%);
+    background-image: linear-gradient(to right, var(--hex2) 0%, var(--hex1) 100%);
     background-size: 100%;
     -webkit-background-clip: text;
     -moz-background-clip: text;
@@ -384,4 +407,47 @@
     }
 }
 
-/* Footer Section */
+/* Footer Section
+.footer {
+    background: #131313;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: 20px;
+    height: 100%;
+    padding: 10rem 0;
+
+
+}
+
+.footer h1 {
+    background-image: linear-gradient(to right, var(--hex2), var(--hex1));
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    margin-bottom: 5rem;
+    font-size: 2.5rem;
+}*/
+
+.footer {
+    background: #100F0F;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+.footer a {
+    color: wheat;
+    text-decoration: none;
+    cursor: none;
+}
+
+.footer h1 {
+    font-size: 30px;
+    background: -webkit-linear-gradient(var(--hex1), var(--hex2));
+    background-clip: text;
+    color: transparent;
+}
