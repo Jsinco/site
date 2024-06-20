@@ -18,7 +18,9 @@ class Theme {
 const themes = [
     new Theme('Sherbet', '#ff6a00', '#ee0979', '#FC8A39', '#E44E97'),
     new Theme('Nebula', '#896CF3', '#4C84EC', '#B29FF5', '#9FBDF5'),
-    new Theme('Mangrove', '#3BD389', '#7D6448', '#9FF5CB', '#8C755B')
+    new Theme('Mangrove', '#3BD389', '#7D6448', '#9FF5CB', '#8C755B'),
+    new Theme('Cotton Candy', '#FA98ED', '#A8FDFD', '#dbb2ee', '#c2daf8'),
+    new Theme('Mocha', '#7B6250', '#E4BD8F', '#957966', '#F1D0AB')
 ]
 
 Array.prototype.random = function () {

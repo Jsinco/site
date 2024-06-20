@@ -38,7 +38,7 @@ body {
 }
 
 .gradient-background {
-    background: linear-gradient(var(--gradient-direction), var(--color1)-25%, var(--color2));
+    background: linear-gradient(var(--gradient-direction), var(--color1), var(--color2));
     /*background: linear-gradient(var(--gradient-direction), var(--color1), var(--color2));*/
     padding: 380px 0;
     position: relative; /* Required for absolute positioning of pseudo-element */
@@ -148,6 +148,7 @@ body {
     color: #fff;
     width: 100%;
     margin-left: 2rem;
+    display: grid;
 }
 
 .main__content h1 {
@@ -155,7 +156,6 @@ body {
     background-color: var(--hex1);
     background-image: linear-gradient(to top, #ff087b 0%, #ed1a52 100%);
     background-size: 100%;
-
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -webkit-text-fill-color: var(--hex2);
@@ -188,6 +188,7 @@ body {
     margin-top: 1rem;
     font-size: 2rem;
     font-weight: 700;
+
 }
 
 .main__btn {
@@ -220,7 +221,7 @@ body {
     left: 0;
     width: 0;
     height: 100%;
-    background: #ff1ead;
+    background: var(--hex2);
     transition: all 0.35s;
     border-radius: 15px;
 }
@@ -407,29 +408,7 @@ body {
     }
 }
 
-/* Footer Section
-.footer {
-    background: #131313;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: 20px;
-    height: 100%;
-    padding: 10rem 0;
-
-
-}
-
-.footer h1 {
-    background-image: linear-gradient(to right, var(--hex2), var(--hex1));
-    background-size: 100%;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
-    margin-bottom: 5rem;
-    font-size: 2.5rem;
-}*/
+/* Footer Section */
 
 .footer {
     background: #100F0F;
