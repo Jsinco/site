@@ -1,5 +1,6 @@
 import { FloatingDock } from "@/components/ui/floating-dock";
 import { faDiscord, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import breweryXIcon from '@/assets/breweryx.webp';
 import lumaMCIcon from '@/assets/lumamc.webp';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -15,6 +16,11 @@ const links = [
         title: "GitHub",
         icon: <FontAwesomeIcon icon={faGithub} className="h-full w-full text-neutral-500 dark:text-neutral-300 lg:text-7xl" />,
         href: "https://github.com/Jsinco",
+    },
+    {
+        title: "Email",
+        icon: <FontAwesomeIcon icon={faPaperPlane} className="h-full w-full text-neutral-500 dark:text-neutral-300 lg:text-7xl" />,
+        href: "mailto:jonah@jsinco.dev",
     },
     {
         title: "LumaMC",
