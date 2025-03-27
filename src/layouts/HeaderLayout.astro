@@ -1,0 +1,24 @@
+---
+import '@/styles/global.css'
+import { BackgroundGradientAnimation } from '@/components/ui/background-gradient-animation.tsx'
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/png" href="../assets/favicon.png" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Jsinco</title>
+    </head>
+
+    <body>
+        <BackgroundGradientAnimation client:load>
+            <div class="absolute z-50 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none text-6xl text-center sm:text-7xl md:text-7xl lg:text-8xl">
+                <div class="bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">
+                    <slot />
+                </div>
+            </div>
+        </BackgroundGradientAnimation>
+    </body>
+</html>

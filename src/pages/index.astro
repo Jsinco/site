@@ -1,20 +1,12 @@
 ---
-import "@/styles/global.css"
-import Header from "../components/Header.astro";
-import WebDock from "../components/WebDock.tsx";
+import WebDock from '../components/WebDock.tsx'
+import HeaderLayout from '@/layouts/HeaderLayout.astro'
+import StandardLayout from '@/layouts/StandardLayout.astro'
 ---
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/png" href="../assets/favicon.png" />
-        <meta name="generator" content={Astro.generator} />
-        <title>Jsinco</title>
-    </head>
-
-    <body>
-        <Header />
-        <WebDock client:load />
-    </body>
-</html>
+<HeaderLayout>
+    <h1>Jsinco.dev</h1>
+</HeaderLayout>
+<StandardLayout>
+    <WebDock client:load />
+</StandardLayout>
